@@ -1,0 +1,31 @@
+body{
+    overflow-x: hidden;
+}
+.container{
+    background-color:#F4EBD7;
+    height: 4cm;
+    /* border: dotted 5px dodgerblue; */
+}
+.navbar{
+    display: flex;
+    padding-left: 3rem;
+    /* border: solid 1px greenyellow; */
+}
+.iconnvbar{
+    height: 8rem;
+    /* border: red 1px solid; */
+}
+.titlenvbr{
+    width: max-content;
+    align-content: center;
+    /* border: #000 1px solid; */
+}
+#slogan{
+    font-family: 'Lucida Sans';
+    font-weight: lighter;
+    font-size: small;
+}
+#title{
+    color: #014235;
+    font-size: 1.3rem;
+}
