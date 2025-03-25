@@ -151,7 +151,7 @@
 <body>
     <nav class="navbar-custom">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="{{ asset('images/assets/calmatea_logo.png') }}" width=100 height=100 alt="Logo">
+            <img src="{{ asset('images/assets/calmatea_logo.png') }}" width=150 height=150 alt="Logo">
             <div style="display: flex; flex-direction: column;">
                 <span><a href="{{route('hpView')}}" class="sendhome">CalmaTea</a></span>
                 <span>"Equilibra tus emociones, encuentra tu calma"</span>
