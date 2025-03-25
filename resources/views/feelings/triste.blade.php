@@ -5,6 +5,20 @@
 <title>Me siento triste...</title>
 
 <style>
+    body{
+        font-family: 'lato';
+    }
+    .content-box h2 {
+        float: right;
+        color: #014235;
+        font-family: 'Fraunces';
+        font-size: 2.4rem;
+    }
+    .content-box h3{
+        padding-top: 1rem;
+        font-family: 'Fraunces';
+        color: #014235;
+    }
     .container-custom {
         flex: 1;
         display: flex;
@@ -12,16 +26,6 @@
         align-items: center;
         text-align: center;
         padding: 50px 10%;
-    }
-
-    .content-box {
-        max-width: 700px;
-        text-align: left;
-    }
-
-    .content-box h2 {
-        font-size: 24px;
-        font-weight: bold;
     }
 
     .content-box p {

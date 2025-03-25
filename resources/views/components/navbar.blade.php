@@ -182,6 +182,7 @@
                     <li><a href="{{route('calmaestres')}}">Calma tu estrés, Entra aquí</a></li>
                     <li><a href="{{route('selecEmociones')}}">Registra una emoción</a></li>
                     <li><a href="{{route('diario')}}">Diario</a></li>
+                    <li><a href="{{route('calendario')}}">Calendario</a></li>
                     <li><a href="{{route('logueo')}}">Cerrar sesión</a></li>
                 </ul>
             </div>

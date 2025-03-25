@@ -1,7 +1,7 @@
 @extends('components.navbar')
 @section('contenido')
 
-<title>CalmaTea - Iniciar Sesión</title>
+<title>Inicio de sesion</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
     body {

@@ -2,8 +2,20 @@
 @section('contenido')
 
 <title>Registra tus emociones</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
+    body{
+        font-family: 'lato';
+    }
+    .form-control{
+        border: none;
+        border-bottom: #000 1px solid;
+        border-radius: 0px;
+    }
+    .form-control:focus{
+        border-bottom: #014235 4px solid;
+    }
+    
     .container-custom {
         flex: 1;
         display: flex;

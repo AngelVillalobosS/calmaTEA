@@ -3,25 +3,31 @@
 @section('contenido')
 
 <title>Me siento Enojado</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
+     body{
+        font-family: 'lato';
+    }
+    .content-box h2 {
+        float: right;
+        color: #014235;
+        font-family: 'Fraunces';
+        font-size: 2.4rem;
+    }
+    .content-box h3{
+        padding-top: 1rem;
+        font-family: 'Fraunces';
+        color: #014235;
+    }
     .container-custom {
+        width: 50%;
+        margin-left: 25%;
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         padding: 50px 10%;
-    }
-
-    .content-box {
-        max-width: 700px;
-        text-align: left;
-    }
-
-    .content-box h2 {
-        font-size: 24px;
-        font-weight: bold;
     }
 
     .content-box p {
@@ -37,11 +43,15 @@
         max-width: 150px;
         margin: 10px;
     }
+    .back-btn-container img{
+        margin-right: 25cm;
+        margin-bottom: 1cm;
+    }
 </style>
 
 <div class="container-custom">
     <div class="content-box">
-        <div class="back-button-container2">
+        <div class="back-btn-container">
             <a href="{{ route('selecEmociones') }}" class="back-button">
                 <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
             </a>

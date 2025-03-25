@@ -4,26 +4,31 @@
 
 <title>Estoy muy nervioso...</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
+    body{
+        font-family: 'lato';
+    }
+    .container-custom h2 {
+        float: right;
+        color: #014235;
+        font-family: 'Fraunces';
+        font-size: 2.4rem;
+    }
+    .container-custom h3{
+        padding-top: 1rem;
+        font-family: 'Fraunces';
+        color: #014235;
+    }
     .container-custom {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align: center;
+        text-align: justify;
         padding: 50px 10%;
     }
-
-    .content-box {
-        max-width: 700px;
-        text-align: left;
-    }
-
-    .content-box h2 {
-        font-size: 24px;
-        font-weight: bold;
-    }
-
+    
     .content-box p {
         font-size: 18px;
     }
@@ -40,7 +45,8 @@
     .back-button-container2 {
         display: flex;
         justify-content: flex-start; 
-        width: 100%; 
+        margin-right: 42%;
+        padding-bottom: 1cm;
     }
     
 </style>
