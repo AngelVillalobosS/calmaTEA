@@ -145,6 +145,22 @@
             width: 100%;
             margin-top: auto;
         }
+
+        body::-webkit-scrollbar {
+            width: var(--scroll-size, 10px);
+            height: var(--scroll-size, 10px);
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: var(--scroll-track, transparent);
+            border-radius: var(--scroll-track-radius, var(--scroll-radius));
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--scroll-thumb-color, grey);
+            background-image: var(--scroll-thumb, none);
+            border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
+        }
     </style>
 </head>
 
@@ -212,4 +228,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 @yield('contenido')
+
 </html>
