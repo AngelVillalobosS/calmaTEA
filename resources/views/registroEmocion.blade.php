@@ -30,8 +30,8 @@
     }
 
     .emoji-button img {
-        width: 80px;
-        height: 80px;
+        width: 9rem;
+        height: 9rem;
     }
 
     a {
