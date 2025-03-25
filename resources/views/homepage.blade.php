@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalmaTea</title>
+    <title>Pagina de inicio</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
     <style>
         body {
@@ -14,6 +14,21 @@
             margin: 0;
             padding: 0;
             background-color: #ffffff;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 1s ease-out;
         }
 
         .header {
@@ -29,7 +44,6 @@
             margin: 0;
             font-size: 24px;
             font-weight: 300;
-            /* No bold */
         }
 
         .container {
@@ -42,13 +56,14 @@
             padding: 40px;
         }
 
+        .container h2, .container p, .content h3, .content p, .button-section p, .quote-section p {
+            animation: fadeInUp 1s ease-out;
+        }
+
         .container h2 {
             font-family: 'Fraunces', serif;
             font-size: 55px;
             color: #014235;
-            display: flex;
-            align-items: center;
-            justify-content: justify;
             max-width: 800px;
             margin: 20px auto;
         }
@@ -67,16 +82,13 @@
             max-width: 90%;
             margin-top: 60px;
             gap: 60px;
-            /* Espaciado entre elementos */
         }
 
         .content-text {
             flex: 1;
             text-align: left;
             max-width: 500px;
-            /* Limita el ancho del texto */
             margin-left: 50px;
-            /* Agrega espacio a la izquierda */
         }
 
         .content h3 {
@@ -91,7 +103,6 @@
             color: #000;
             text-align: left;
             max-width: 500px;
-            /* Alineado con el título */
         }
 
         .illustration {
@@ -117,7 +128,6 @@
             font-size: 40px;
             font-family: 'Lato', sans-serif;
             font-weight: 300;
-            /* Lato Light */
             color: #000;
             margin-bottom: 10px;
         }
@@ -141,6 +151,7 @@
             text-decoration: none;
             border: 2px solid #014235;
             border-radius: 5px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .quote-section {
@@ -152,8 +163,6 @@
             text-align: center;
             justify-content: center;
             margin: 0 auto;
-            /* Centrado en la página */
-
         }
 
         .quote-section img {
@@ -180,7 +189,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <h2>¡Bienvenido a CalmaTea!</h2>
         <p>
@@ -206,13 +214,10 @@
             </div>
         </div>
     </div>
-
     <div class="quote-section">
         <img src="{{asset('images/assets/calma.jpg')}}" alt="Ícono decorativo">
         <p>"La vida está hecha por la mente, y somos lo que pensamos."</p>
     </div>
-
-
+@include('components.pagefoot')
 </body>
-
 </html>

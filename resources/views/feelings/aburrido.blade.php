@@ -1,10 +1,13 @@
 @extends('components.navbar')
 
 @section('contenido')
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <title>Me siento aburrido</title>
 
 <style>
+    body{
+        font-family: 'lato';
+    }
     .container-custom {
         flex: 1;
         display: flex;
@@ -15,15 +18,22 @@
     }
 
     .content-box {
+        padding: 1.3rem;
         max-width: 700px;
-        text-align: left;
+        text-align: justify;
     }
 
     .content-box h2 {
-        font-size: 24px;
-        font-weight: bold;
+        float: right;
+        color: #014235;
+        font-family: 'Fraunces';
+        font-size: 2.4rem;
     }
-
+    .content-box h3{
+        padding-top: 1rem;
+        font-family: 'Fraunces';
+        color: #014235;
+    }
     .content-box p {
         font-size: 18px;
     }
@@ -48,7 +58,7 @@
         </div>
         
         <div class="text-with-image-left">
-            <img src="{{ asset('images/assets/niña-mensaje2.png') }}" alt="Niña con mensaje" width="250">
+            <img src="{{ asset('images/assets/sleepping_girl.png') }}" alt="Niña con mensaje" width="250">
             <h2>¿Te sientes aburrido?<br>¡Está bien! A veces, el aburrimiento es la oportunidad perfecta para descubrir algo nuevo.</h2>
         </div>
 
@@ -77,7 +87,7 @@
 
         <div class="text-with-image-left">
             <h3 class="mt-4">El aburrimiento no dura para siempre. A veces, solo necesitas un pequeño empujón para descubrir algo interesante. ¡Anímate a probar algo nuevo!</h3>
-            <img src="{{ asset('images/assets/niña-despedida2.png') }}" alt="Niña despidiéndose" width="250">
+            <img src="{{ asset('images/assets/flowerhat_girl.png') }}" alt="Niña despidiéndose" width="250">
         </div>
     </div>
 </div>
