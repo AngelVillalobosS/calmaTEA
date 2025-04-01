@@ -44,7 +44,7 @@
             <button type="submit" class="lginbttn">Registrate</button>
         </form>
 
-        <p>¿Ya tienes una cuenta? <a href="{{route('formulariologin')}}" class="register-link">Inicia sesion</a></p>
+        <p>¿Ya tienes una cuenta? <a href="{{route('logueo')}}" class="register-link">Inicia sesion</a></p>
     </div>
     <div class="illustration">
         <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
@@ -60,38 +60,61 @@
 <!-- Codigo para la validacion de la contrasenia -->
 <script>
     function validarPassword(event) {
-        event.preventDefault(); // Solo si la validación falla
+        event.preventDefault();
+        let isValid = true;
 
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirm_password").value;
-        var lengthCheck = password.length >= 8;
-        var upperCheck = /[A-Z]/.test(password);
-        var lowerCheck = /[a-z]/.test(password);
-        var numberCheck = /\d/.test(password);
-        var specialCheck = /[@$!%*?&_]/.test(password); // Validacion de char especiales
-        var matchCheck = password === confirmPassword; // Validacion de que ambas contraseñas sean iguales
+        // Ocultar todos los mensajes de error al inicio
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+        });
 
-        // Validacion de los datos y tiempo de espera de los mensajes
-        if (!lengthCheck) showError(document.getElementById("passwordLength"));
-        if (!upperCheck) showError(document.getElementById("passwordUpper"));
-        if (!lowerCheck) showError(document.getElementById("passwordLower"));
-        if (!numberCheck) showError(document.getElementById("passwordNumber"));
-        if (!specialCheck) showError(document.getElementById("passwordSpecial"));
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
 
+        // Realizar todas las validaciones
+        const validations = {
+            lengthCheck: password.length >= 8,
+            upperCheck: /[A-Z]/.test(password),
+            lowerCheck: /[a-z]/.test(password),
+            numberCheck: /\d/.test(password),
+            specialCheck: /[@$!%*?&_]/.test(password),
+            matchCheck: password === confirmPassword
+        };
 
-        if (!matchCheck) {
+        // Mostrar mensajes de error específicos
+        if (!validations.lengthCheck) {
+            document.getElementById("passwordLength").style.display = 'block';
+            isValid = false;
+        }
+        if (!validations.upperCheck) {
+            document.getElementById("passwordUpper").style.display = 'block';
+            isValid = false;
+        }
+        if (!validations.lowerCheck) {
+            document.getElementById("passwordLower").style.display = 'block';
+            isValid = false;
+        }
+        if (!validations.numberCheck) {
+            document.getElementById("passwordNumber").style.display = 'block';
+            isValid = false;
+        }
+        if (!validations.specialCheck) {
+            document.getElementById("passwordSpecial").style.display = 'block';
+            isValid = false;
+        }
+
+        // Validar coincidencia de contraseñas
+        if (!validations.matchCheck) {
             alert("Las contraseñas no coinciden.");
-            return false;
+            isValid = false;
         }
 
-        return lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck && matchCheck;
-        if (!valid) {
-            return false;
+        // Si todo es válido, enviar formulario
+        if (isValid) {
+            event.target.submit();
         }
 
-        if (valid) {
-            event.target.submit(); // Enviar formulario si todo es válido
-        }
+        return false;
     }
 
     // Mostrar y ocultar la contraseña al marcar o desmarcar el checkbox

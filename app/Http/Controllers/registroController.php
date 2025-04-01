@@ -23,7 +23,7 @@ class registroController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'email' => 'required|email|unique:usuarios',
+            'email' => 'required|email|unique:usuarios,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
