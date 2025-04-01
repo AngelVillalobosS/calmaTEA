@@ -1,7 +1,7 @@
 @extends('components.navbar')
 @section('contenido')
 
-<title>Inicio de sesion</title>
+<title>CalmaTea - Iniciar Sesión</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
     body {
@@ -36,7 +36,6 @@
         padding: 20px;
         gap: 20px;
     }
-
 
     .login-box {
         max-width: 400px;
@@ -105,18 +104,34 @@
     }
 
     .illustration img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
 
+    .register-link {
+        font-size: 16px;
+        color: #2a7f62;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .register-link:hover {
+        text-decoration: underline;
+    }
+    
+    .error-message {
+        color: red;
+        display: none;
+        font-size: 14px;
+    }
 </style>
 
 <div class="container">
     <div class="login-box">
         <h2>Ábrete a<br>la atención plena</h2>
         <p>Inicia sesión para continuar con tu salud emocional</p>
-        <form>
+        <form onsubmit="return validarPassword()">
             <div class="form-group">
                 <label for="email">Email *</label>
                 <input type="email" id="email" placeholder="Ingrese su email" required>
@@ -124,13 +139,40 @@
             <div class="form-group">
                 <label for="password">Contraseña *</label>
                 <input type="password" id="password" placeholder="Ingrese una contraseña" required>
+                <small id="passwordHelp" class="error-message">La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula, un número y un carácter especial.</small>
+                <small id="passwordLength" class="error-message">Debe tener al menos 8 caracteres.</small>
+                <small id="passwordUpper" class="error-message">Debe incluir al menos una letra mayúscula.</small>
+                <small id="passwordLower" class="error-message">Debe incluir al menos una letra minúscula.</small>
+                <small id="passwordNumber" class="error-message">Debe incluir al menos un número.</small>
+                <small id="passwordSpecial" class="error-message">Debe incluir al menos un carácter especial (@$!%*?&).</small>
             </div>
             <a href="{{route('hpView')}}" class="lginbttn"><button type="submit">Iniciar sesión</button></a>
         </form>
+        <p>¿No tienes una cuenta? <a href="{{route('formularioregistro')}}" class="register-link">Ingresa aquí</a></p>
     </div>
     <div class="illustration">
         <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
     </div>
 </div>
+
+<script>
+    function validarPassword() {
+        var password = document.getElementById("password").value;
+        var lengthCheck = password.length >= 8;
+        var upperCheck = /[A-Z]/.test(password);
+        var lowerCheck = /[a-z]/.test(password);
+        var numberCheck = /\d/.test(password);
+        var specialCheck = /[@$!%*?&]/.test(password);
+        
+        document.getElementById("passwordLength").style.display = lengthCheck ? "none" : "block";
+        document.getElementById("passwordUpper").style.display = upperCheck ? "none" : "block";
+        document.getElementById("passwordLower").style.display = lowerCheck ? "none" : "block";
+        document.getElementById("passwordNumber").style.display = numberCheck ? "none" : "block";
+        document.getElementById("passwordSpecial").style.display = specialCheck ? "none" : "block";
+        
+        return lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck;
+    }
+</script>
+
 @include('components.pagefoot')
 @stop

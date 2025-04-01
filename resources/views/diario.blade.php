@@ -113,7 +113,7 @@
 
 <body>
     <div class="back-btn-container">
-        <a href="{{ route('hpView') }}" class="back-button">
+        <a href="{{ route('selecEmociones') }}" class="back-button">
             <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
         </a>
     </div>
@@ -125,6 +125,19 @@
 
     <div class="form-container">
         <form>
+            <label for="intensidad">¿Cuál es tu emocion en este momento?</label>
+            <select id="intensidad">
+                <option>😬 Nervioso</option>
+                <option>😒 Aburrido</option>
+                <option>😏 Travieso</option>
+                <option>😊 Contento</option>
+                <option>😱 Miedoso</option>
+                <option>😢 Triste</option>
+                <option>😲 Shokeado</option>
+                <option>🥰 Amado</option>
+                <option>😡 Enojado</option>
+            </select>
+
             <label for="intensidad">¿Tu emoción es fuerte o suave?</label>
             <select id="intensidad">
                 <option>Fuerte</option>

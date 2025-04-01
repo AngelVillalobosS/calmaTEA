@@ -17,16 +17,20 @@ Route::get('/formulariologin', [registroController::class, 'formulariologin'])->
 Route::post('/guardalogin', [registroController::class, 'guardalogin'])->name('guardalogin');
 
 Route::get('homepage', [viewController::class, 'homepageView'])->name('hpView');
+
 Route::get('calendar', [viewController::class, 'calendarView'])->name('calendario');
 Route::get('diario', [viewController::class, 'diarioView'])->name('diario');
 Route::get('calmaestres', [viewController::class, 'calmaEstresView'])->name('calmaestres');
+Route::get('ejercicios', [viewController::class, 'ejerciciosView'])->name('ejercicios');
 
-Route::get('formularioregistro', [viewController::class, 'formularioregistro'])->name('formularioregistro');
+//Route::get('formularioregistro', [viewController::class, 'formularioregistro'])->name('formularioregistro');
 Route::post('guardaregistro', [viewController::class, 'guardaregistro'])->name('guardaregistro');
-Route::get('formulariologin', [viewController::class, 'formulariologin'])->name('formulariologin');
+//Route::get('formulariologin', [viewController::class, 'formulariologin'])->name('formulariologin');
 Route::post('guardalogin', [viewController::class, 'guardalogin'])->name('guardalogin');
 
 // Emociones
+Route::get('/emocion/{emocion}', [viewController::class, 'mostrarEmocion'])->name('emocion');
+
 Route::get('selecEmociones', [viewController::class, 'selecEmocionesView'])->name('selecEmociones');
 Route::get('emociones/selecNervioso', [viewController::class, 'selecNerviosoView'])->name('selecNervioso');
 Route::get('emociones/selecAburrido', [viewController::class, 'selecAburridoView'])->name('selecAburrido');

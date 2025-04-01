@@ -136,6 +136,12 @@
 </head>
 <body>
     
+    <div class="back-btn-container">
+        <a href="{{ route('selecEmociones') }}" class="back-button">
+            <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
+        </a>
+    </div> 
+
     <h2>Estrategias para calmarte cuando estés nervioso o ansioso</h2>
     <div class="strategy">
         <div class="strategy-icon">🫁</div>

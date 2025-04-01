@@ -22,12 +22,21 @@ class viewController extends Controller
         return view('calmaestres');
     }
     
+    public function ejerciciosView(){
+        return view('ejercicios');
+    }
+
     // Subvistas
     public function diarioView(){
         return view ('diario');
     }
 
     // Vista de las emociones
+    public function mostrarEmocion($emocion)
+    {
+        return view('emociones.'.$emocion);
+    }
+    
     public function selecEmocionesView()
     {
         return view('registroEmocion');
@@ -35,46 +44,46 @@ class viewController extends Controller
 
     public function selecNerviosoView()
     {
-        return view('feelings.nervioso');
+        return view('emociones.nervioso');
     }   
     
     public function selecAburridoView()
     {
-        return view('feelings.aburrido');
+        return view('emociones.aburrido');
     }   
     
     public function selecTraviesoView()
     {
-        return view('feelings.travieso');
+        return view('emociones.travieso');
     }    
 
     public function selecContentoView()
     {
-        return view('feelings.contento');
+        return view('emociones.contento');
     } 
     
     public function selecMiedosoView()
     {
-        return view('feelings.miedoso');
+        return view('emociones.miedoso');
     } 
 
     public function selecTristeView()
     {
-        return view('feelings.triste');
+        return view('emociones.triste');
     }
 
     public function selecShokeadoView()
     {
-        return view('feelings.shokeado');
+        return view('emociones.shokeado');
     } 
 
     public function selecAmadoView()
     {
-        return view('feelings.amado');
+        return view('emociones.amado');
     }  
 
     public function selecEnojadoView()
     {
-        return view('feelings.enojado');
+        return view('emociones.enojado');
     }
 }

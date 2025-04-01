@@ -1,21 +1,49 @@
-@extends('components.navbar')
-@section('contenido')
+@include('components.navbar')
+<!DOCTYPE html>
+<html lang="es">
 
-<title>Registra tus emociones</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Registra tus emociones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 <style>
-    body{
-        font-family: 'lato';
+    body {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
     }
-    .form-control{
-        border: none;
-        border-bottom: #000 1px solid;
-        border-radius: 0px;
+    .header img {
+        width: 273px;
+        height: 273px;
+        margin-right: 15px;
     }
-    .form-control:focus{
-        border-bottom: #014235 4px solid;
+
+    .header h1 {
+        font-size: 36px;
+        color: #014235;
+        margin: 0;
+        font-family: 'Fraunces', serif;
     }
-    
+
+    h2 {
+        font-family: 'Fraunces', serif;
+        font-size: 55px;
+        color: #014235;
+        display: flex;
+        align-items: center;
+        justify-content: justify;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    h2 img {
+        margin-right: 15px;
+    }
     .container-custom {
         flex: 1;
         display: flex;
@@ -26,6 +54,21 @@
         padding: 50px 0;
     }
 
+    .title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 30px;
+    }
+
     .emoji-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -34,6 +77,7 @@
         max-width: 400px;
         margin: 20px auto;
     }
+    
 
     .emoji-button {
         background: none;
@@ -46,88 +90,151 @@
         height: 9rem;
     }
 
+    .emoji-button.selected {
+        border-color: #014235;
+        background-color: rgba(1, 66, 53, 0.1);
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        max-width: 400px;
+        height: 100%;
+    }
+
+    .form-container label, .form-container input, .form-container button {
+        margin-top: 15px;
+        width: 100%;
+        text-align: left;
+    }
+    label {
+            font-size: 20px;
+            color: #014235;
+            display: block;
+            margin-top: 15px;
+        }
+
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+    }
+
     a {
         text-decoration: none;
         color: inherit;
     }
-</style>
+    
+    .submit-button {
+            font-size: 17px;
+            color: #014235;
+            border: 2px solid #014235;
+            background-color: transparent;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
+        .submit-button:hover {
+            background-color: #014235;
+            color: white;
+        }
+</style>
+</head>
+
+<body>
 <div class="container-custom">
 
-    <div class="back-button-container">
-        <a href="{{route('hpView')}}" class="back-button">
-            <img src="{{ asset('images/assets/flecha.png')}}" alt="Boton de Regresar" width="70">
-        </a>
+    <div class="title">
+        <h2>¿Cómo te encuentras hoy?
+            <br>¡Cuéntanos!
+        </h2>
     </div>
 
-    <h2>¿Cómo te encuentras hoy?
-        <br>¡Cuéntanos!
-    </h2>
+    <div class="main-content">
+        <!-- Emojis Section -->
+        <div class="emoji-grid">
+            @php
+                $emociones = [
+                    'nervioso' => 'Nervioso',
+                    'aburrido' => 'Aburrido',
+                    'travieso' => 'Travieso',
+                    'contento' => 'Contento',
+                    'miedoso' => 'Miedoso',
+                    'triste' => 'Triste',
+                    'shokeado' => 'Shokeado',
+                    'amado' => 'Amado',
+                    'enojado' => 'Enojado'
+                ];
+            @endphp
 
-    <div class="emoji-grid">
-        <button class="emoji-button" onclick="location.href='{{ route('selecNervioso') }}'">
-            <img src="{{ asset('images/assets/nervioso.png')}}" alt="Boton de Nervioso" width="250">
-            <p>Nervioso</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecAburrido') }}'">
-            <img src="{{ asset('images/assets/aburrido.png')}}" alt="Boton de Aburrido" width="250">
-            <p>Aburrido</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecTravieso') }}'">
-            <img src="{{ asset('images/assets/travieso.png')}}" alt="Boton de Travieso" width="250">
-            <p>Travieso</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecContento') }}'">
-            <img src="{{ asset('images/assets/contento.png')}}" alt="Boton de Contento" width="250">
-            <p>Contento</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecMiedoso') }}'">
-            <img src="{{ asset('images/assets/miedoso.png')}}" alt="Boton de Miedoso" width="250">
-            <p>Miedoso</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecTriste') }}'">
-            <img src="{{ asset('images/assets/triste.png')}}" alt="Boton de Triste" width="250">
-            <p>Triste</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecShokeado') }}'">
-            <img src="{{ asset('images/assets/shokeado.png')}}" alt="Boton de Shokeado" width="250">
-            <p>Shokeado</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecAmado') }}'">
-            <img src="{{ asset('images/assets/amado.png')}}" alt="Boton de Amado" width="250">
-            <p>Amado</p>
-        </button>
-        <button class="emoji-button" onclick="location.href='{{ route('selecEnojado') }}'">
-            <img src="{{ asset('images/assets/enojado.png')}}" alt="Boton de Enojado" width="250">
-            <p>Enojado</p>
-        </button>
-    </div>
-
-    <div class="mt-4">
-        <label>¿Qué causó esta emoción?</label>
-        <input type="text" class="form-control w-50 mx-auto">
-    </div>
-
-    <div class="mt-3">
-        <label>¿Quieres recibir una sugerencia para mejorar tu estado de ánimo?</label>
-        <input type="text" class="form-control w-50 mx-auto">
-    </div>
-
-    <div class="mt-4">
-        <button class="btn btn-outline-success"> <a href="{{route('diario')}}">Enviar</a></button>
-    </div>
-
-    <div class="mt-3">
-        <label>¿Deseas ver tu calendario emocional?</label>
-    </div>
-
-    <div class="mt-3">
-        <button class="btn btn-outline-primary"> <a none; href="{{route('calendario')}}">Continuar</a></button>
+            @foreach ($emociones as $key => $value)
+                <button class="emoji-button" data-emocion="{{ $key }}">
+                    <img src="{{ asset('images/assets/'.$key.'.png') }}" alt="Boton de {{ $value }}">
+                    <p>{{ $value }}</p>
+                </button>
+            @endforeach
+        </div>
+        
+        <!-- Formulario a la derecha de las emociones -->
+        <div class="form-container">
+            <label>¿Qué causó esta emoción?</label>
+            <input type="text" id="causa_emocion"  required>
+            
+            <label>Preciona el botón para recibir un consejo</label>            
+            <button type="button" class="submit-button" id="enviar">Enviar</button>
+        </div>
     </div>
 </div>
 
-<div class="footer">
-    <p>&copy; 2025 CalmaTea</p>
-</div>
+<script>
+    let emocionSeleccionada = null;
 
-@stop
+    // Manejar la selección de emoción
+    document.querySelectorAll(".emoji-button").forEach(button => {
+        button.addEventListener("click", function() {
+            // Quitar selección previa
+            document.querySelectorAll(".emoji-button").forEach(btn => btn.classList.remove("selected"));
+            
+            // Marcar como seleccionado
+            this.classList.add("selected");
+            
+            // Guardar la emoción seleccionada
+            emocionSeleccionada = this.getAttribute("data-emocion");
+        });
+    });
+
+    // Manejar el clic en el botón "Enviar"
+    document.getElementById("enviar").addEventListener("click", function() {
+        let causaEmocion = document.getElementById("causa_emocion").value.trim();
+
+        // Verificar si se seleccionó una emoción
+        if (!emocionSeleccionada) {
+            alert("Por favor, selecciona una emoción antes de continuar.");
+            return;  // Detiene la ejecución
+        }
+
+        // Verificar si la pregunta ha sido respondida
+        if (causaEmocion === "") {
+            alert("Por favor, responde la pregunta '¿Qué causó esta emoción?' antes de continuar.");
+            return;  // Detiene la ejecución
+        }
+
+        
+        // Obtener la URL generada por Laravel (Blade)
+        let urlRedireccion = "{{ route('emocion', ':emocion') }}".replace(':emocion', emocionSeleccionada);
+
+        // Redirigir a la página correspondiente
+        window.location.href = urlRedireccion;
+    });
+</script>
+
+
+@include('components.pagefoot')
+</body>
+
+</html>
