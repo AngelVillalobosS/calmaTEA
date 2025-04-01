@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\loginController;
 use App\Http\Controllers\registroController;
 use App\Http\Controllers\viewController;
 use App\Http\Controllers\registroEmocionController;
@@ -10,12 +11,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 // Logueo
-Route::get('login', [viewController::class, 'loginView']) -> name('logueo');
+// Ruta GET para mostrar el formulario
+Route::get('/login', [loginController::class, 'showLoginForm'])->name('logueo');
+// Ruta POST para procesar el login
+Route::post('/login', [loginController::class, 'guardalogin'])->name('login.post');
 Route::get('/formularioregistro', [registroController::class, 'formularioregistro'])->name('formularioregistro');
-Route::post('/registrar', [usuarioController::class, 'store'])->name('guardaregistro');
 Route::post('/guardaregistro', [registroController::class, 'guardaregistro'])->name('guardaregistro');
 Route::get('/formulariologin', [registroController::class, 'formulariologin'])->name('formulariologin');
-Route::post('/guardalogin', [registroController::class, 'guardalogin'])->name('guardalogin');
 
 // Principales
 

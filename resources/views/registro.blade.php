@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirmar Contraseña *</label>
-                <input type="password" id="confirm_password" placeholder="Confirme su contraseña" required>
+                <input type="password" name="password_confirmation" id="confirm_password" placeholder="Confirme su contraseña" required>
             </div>
             <input type="checkbox" id="showPassword"> <label for="showPassword">Mostrar contraseñas</label>
             <button type="submit" class="lginbttn">Registrate</button>
@@ -59,8 +59,9 @@
 
 <!-- Codigo para la validacion de la contrasenia -->
 <script>
-    function validarPassword() {
-        event.preventDefault();
+    function validarPassword(event) {
+        event.preventDefault(); // Solo si la validación falla
+
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
         var lengthCheck = password.length >= 8;
@@ -87,7 +88,10 @@
         if (!valid) {
             return false;
         }
-        event.currentTarget.submit();
+
+        if (valid) {
+            event.target.submit(); // Enviar formulario si todo es válido
+        }
     }
 
     // Mostrar y ocultar la contraseña al marcar o desmarcar el checkbox
