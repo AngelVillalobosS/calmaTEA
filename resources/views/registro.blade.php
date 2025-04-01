@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="email" name="email" id="email" placeholder="Ingrese su email" required>
+                <input type="email" name="email" id="email" placeholder="Ingrese su email" required autocomplete="@gmail.com">
             </div>
 
             <div class="form-group">
@@ -41,15 +41,22 @@
                 <input type="password" id="confirm_password" placeholder="Confirme su contraseña" required>
             </div>
             <input type="checkbox" id="showPassword"> <label for="showPassword">Mostrar contraseñas</label>
-            <input type="submit" class="lginbttn" value="Registrate">
-            
+            <button type="submit" class="lginbttn">Registrate</button>
         </form>
+
         <p>¿Ya tienes una cuenta? <a href="{{route('formulariologin')}}" class="register-link">Inicia sesion</a></p>
     </div>
     <div class="illustration">
         <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
     </div>
 </div>
+<!-- Comienzan los scripts -->
+<script>
+    window.lengthCheck = function(value, minLength) {
+        return value.length >= minLength;
+    }
+</script>
+
 <!-- Codigo para la validacion de la contrasenia -->
 <script>
     function validarPassword() {
@@ -69,7 +76,7 @@
         if (!lowerCheck) showError(document.getElementById("passwordLower"));
         if (!numberCheck) showError(document.getElementById("passwordNumber"));
         if (!specialCheck) showError(document.getElementById("passwordSpecial"));
-        
+
 
         if (!matchCheck) {
             alert("Las contraseñas no coinciden.");
