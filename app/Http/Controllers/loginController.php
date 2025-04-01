@@ -41,11 +41,6 @@ class loginController extends Controller
             return back()->withErrors(['credenciales' => 'Credenciales incorrectas.']);
         }
 
-        if (!\Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
-            RateLimiter::hit($throttleKey);
-            return back()->withErrors(['credenciales' => 'Credenciales incorrectas.']);
-        }
-
         // Autenticación manual
         Auth::login($user, $request->filled('remember'));
 
