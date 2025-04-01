@@ -160,6 +160,19 @@ a {
 .text-with-image-left img {
     margin-right: 15px;
 }
+.back-btn-container {
+    position: absolute;  /* Hace que la flecha esté fuera del flujo normal */
+    top: 250px;  /* Ajusta la distancia desde la parte superior de la página */
+    left: 250px;  /* Ajusta la distancia desde el borde izquierdo */
+    z-index: 10;  /* Asegura que la flecha esté por encima de otros elementos si es necesario */
+}
+
+
+
+.back-arrow {
+    width: 120px; /* Ajusta el tamaño de la flecha */
+    height: auto; /* Mantén la proporción de la imagen */
+}
 </style>
 
 </head>
@@ -167,11 +180,11 @@ a {
 <body>
 <div class="container-custom">
 
-    <div class="back-button-container2">
-        <a href="{{ route('selecEmociones') }}" class="back-button">
-            <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
-        </a>
-    </div>
+<div class="back-btn-container">
+    <a href="{{ route('selecEmociones') }}" class="back-button">
+        <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" class="back-arrow">
+    </a>
+</div>
 
     <div class="text-with-image-left">
         <img src="{{ asset('images/assets/niña-mensaje.png') }}" alt="Niña con mensaje" width="250">
@@ -235,8 +248,9 @@ a {
         }
 
         document.getElementById('mensaje-container').style.display = 'block';
-        document.getElementById('sentir').value = ''; // Limpiar el campo de texto
         this.style.display = 'none'; // Ocultar el botón
+
+        document.querySelector('.form-container input').style.display = 'none'; 
     });
 </script>
 

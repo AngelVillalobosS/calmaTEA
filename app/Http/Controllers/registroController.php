@@ -17,16 +17,21 @@ class registroController extends Controller
     public function guardaregistro(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'nombre' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'email' => 'required|email|unique:usuarios',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $usuarios = new usuarios;
-        $usuarios -> email = $request->email;
-        $usuarios -> password = $request->password;
+        // Crear un nuevo usuario
+        usuarios::create([
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Asegúrate de cifrar la contraseña
+        ]);
 
-        Auth::login($usuarios);
-        return redirect()->route('inicio');
+        return redirect()->route('hpView')->with('success', 'Usuario registrado correctamente');
     }
 
     public function formulariologin()

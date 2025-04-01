@@ -183,7 +183,7 @@
                     <li><a href="{{route('selecEmociones')}}">Registra una emoción</a></li>
                     <li><a href="{{route('ejercicios')}}">Ejercicios</a></li>
                     <li><a href="{{route('diario')}}">Diario</a></li>
-                    <li><a href="{{route('calendario')}}">Calendario emocional</a></li>
+                    <li><a href="{{route('mostrarCalendario')}}">Calendario emocional</a></li>
                     <li><a href="{{route('logueo')}}">Cerrar sesión</a></li>
                 </ul>
             </div>

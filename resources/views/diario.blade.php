@@ -87,10 +87,12 @@
         .hidden {
             display: none;
         }
-        .back-btn-container{
+
+        .back-btn-container {
             margin-left: 20%;
             margin-top: 3%;
         }
+
         /* Estilos para el footer */
         .footer-text {
             max-width: 600px;
@@ -108,13 +110,33 @@
             width: 280px;
             height: 280px;
         }
+
+        .back-btn-container {
+            position: absolute;
+            /* Hace que la flecha esté fuera del flujo normal */
+            top: 250px;
+            /* Ajusta la distancia desde la parte superior de la página */
+            left: 0px;
+            /* Ajusta la distancia desde el borde izquierdo */
+            z-index: 10;
+            /* Asegura que la flecha esté por encima de otros elementos si es necesario */
+        }
+
+
+
+        .back-arrow {
+            width: 120px;
+            /* Ajusta el tamaño de la flecha */
+            height: auto;
+            /* Mantén la proporción de la imagen */
+        }
     </style>
 </head>
 
 <body>
     <div class="back-btn-container">
         <a href="{{ route('selecEmociones') }}" class="back-button">
-            <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
+            <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" class="back-arrow">
         </a>
     </div>
     <h2>
@@ -124,101 +146,109 @@
     </h2>
 
     <div class="form-container">
-        <form>
-            <label for="intensidad">¿Cuál es tu emocion en este momento?</label>
-            <select id="intensidad">
-                <option>😬 Nervioso</option>
-                <option>😒 Aburrido</option>
-                <option>😏 Travieso</option>
-                <option>😊 Contento</option>
-                <option>😱 Miedoso</option>
-                <option>😢 Triste</option>
-                <option>😲 Shokeado</option>
-                <option>🥰 Amado</option>
-                <option>😡 Enojado</option>
+        <form action="{{ route('registrarEmocion') }}" method="POST">
+            @csrf
+
+            <label for="emocion">¿Cuál es tu emoción en este momento?</label>
+            <select name="emocion" required>
+                <option value="" selected disabled>Selecciona una emoción</option>
+                <option value="Nervioso">😬 Nervioso</option>
+                <option value="Aburrido">😒 Aburrido</option>
+                <option value="Travieso">😏 Travieso</option>
+                <option value="Contento">😊 Contento</option>
+                <option value="Miedoso">😱 Miedoso</option>
+                <option value="Triste">😢 Triste</option>
+                <option value="Shokeado">😲 Shokeado</option>
+                <option value="Amado">🥰 Amado</option>
+                <option value="Enojado">😡 Enojado</option>
             </select>
 
             <label for="intensidad">¿Tu emoción es fuerte o suave?</label>
-            <select id="intensidad">
-                <option>Fuerte</option>
-                <option>Suave</option>
+            <select name="intensidad" required>
+                <option value="" selected disabled>Selecciona la intensidad</option>
+                <option value="Fuerte">Fuerte</option>
+                <option value="Suave">Suave</option>
             </select>
 
             <label for="cuerpo">¿Dónde sientes la emoción en tu cuerpo?</label>
-            <select id="cuerpo">
-                <option>En la cabeza</option>
-                <option>En el pecho</option>
-                <option>En las manos</option>
+            <select name="cuerpo" required>
+                <option value="" selected disabled>Selecciona donde sientes la emoción</option>
+                <option value="En la cabeza">En la cabeza</option>
+                <option value="En el pecho">En el pecho</option>
+                <option value="En las manos">En las manos</option>
             </select>
 
             <label for="gusto">¿Esta emoción te gusta o no te gusta?</label>
-            <select id="gusto">
-                <option>Me gusta</option>
-                <option>No me gusta</option>
-                <option>No estoy seguro</option>
+            <select name="gusto" required>
+                <option value="" selected disabled>Selecciona si te gusta o no</option>
+                <option value="Me gusta">Me gusta</option>
+                <option value="No me gusta">No me gusta</option>
+                <option value="No estoy seguro">No estoy seguro</option>
             </select>
 
             <label for="paso">¿Algo pasó que te hizo sentir así?</label>
-            <select id="paso" onchange="mostrarPreguntasAdicionales()">
-                <option>No</option>
-                <option>Sí</option>
+            <select name="paso" id="paso" onchange="mostrarPreguntasAdicionales()" required>
+                <option value="" selected disabled>Selecciona si algo pasó</option>
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
             </select>
 
             <div id="preguntas-adicionales" class="hidden">
                 <label for="razon">¿Fue por una persona, un lugar o algo que hiciste?</label>
-                <select id="razon">
-                    <option>Persona</option>
-                    <option>Lugar</option>
-                    <option>Algo que hice</option>
+                <select name="razon">
+                    <option value="" selected disabled>Selecciona una razón</option>
+                    <option value="Persona">Persona</option>
+                    <option value="Lugar">Lugar</option>
+                    <option value="Algo que hice">Algo que hice</option>
                 </select>
 
                 <label for="repeticion">¿Esto te ha pasado antes?</label>
-                <select id="repeticion">
-                    <option>Sí</option>
-                    <option>No</option>
-                    <option>No estoy seguro</option>
+                <select name="repeticion">
+                    <option value="" selected disabled>Selecciona si te ha pasado antes</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                    <option value="No estoy seguro">No estoy seguro</option>
                 </select>
+
             </div>
 
             <label for="cambiar">¿Quieres hacer algo para cambiar cómo te sientes?</label>
-            <select id="cambiar">
-                <option>Sí</option>
-                <option>No</option>
-                <option>No sé</option>
+            <select name="cambiar" required>
+                <option value="" selected disabled>Selecciona si quieres cambiar cómo te sientes</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+                <option value="No sé">No sé</option>
             </select>
 
             <label for="ayuda">¿Qué te ayudaría en este momento?</label>
-            <select id="ayuda">
-                <option>🤗 Un abrazo</option>
-                <option>🎵 Escuchar música</option>
-                <option>🧘 Estar solo</option>
-                <option>🗣️ Hablar con alguien</option>
-            </select>
-
-            <label for="necesitas-ayuda">¿Necesitas ayuda de alguien para sentirte mejor?</label>
-            <select id="necesitas-ayuda">
-                <option>Sí</option>
-                <option>No</option>
-                <option>No estoy seguro</option>
+            <select name="ayuda" required>
+                <option value="" selected disabled>Selecciona lo que te ayudaría</option>
+                <option value="Un abrazo">🤗 Un abrazo</option>
+                <option value="Escuchar música">🎵 Escuchar música</option>
+                <option value="Estar solo">🧘 Estar solo</option>
+                <option value="Hablar con alguien">🗣️ Hablar con alguien</option>
             </select>
 
             <label for="animal">Si tu emoción fuera un animal, ¿cuál sería?</label>
-            <select id="animal">
-                <option>🦁 León (fuerte, dominante)</option>
-                <option>🐢 Tortuga (tranquilo, protegido)</option>
-                <option>🦋 Mariposa (cambio, delicadeza)</option>
-                <option>🐺 Lobo (solitario, instintivo)</option>
-                <option>🐦 Pájaro (libre, ligero)</option>
-                <option>🐍 Serpiente (sigiloso, transformador)</option>
-                <option>🐬 Delfín (alegre, sociable)</option>
-                <option>🐘 Elefante (sabio, resiliente)</option>
+            <select name="animal" required>
+                <option value="" selected disabled>Selecciona un animal</option>
+                <option value="León">🦁 León (fuerte, dominante)</option>
+                <option value="Tortuga">🐢 Tortuga (tranquilo, protegido)</option>
+                <option value="Mariposa">🦋 Mariposa (cambio, delicadeza)</option>
+                <option value="Lobo">🐺 Lobo (solitario, instintivo)</option>
+                <option value="Pájaro">🐦 Pájaro (libre, ligero)</option>
+                <option value="Serpiente">🐍 Serpiente (sigiloso, transformador)</option>
+                <option value="Delfín">🐬 Delfín (alegre, sociable)</option>
+                <option value="Elefante">🐘 Elefante (sabio, resiliente)</option>
             </select>
 
-            <button type="submit" class="submit-button">Enviar</button>
+            <div style="margin-bottom: 20px;">
+                <button type="submit" class="submit-button" id="enviar">Enviar</button>
+            </div>
         </form>
     </div>
 
-    <div class="footer-text">
+    <div id="mensaje-container" class="footer-text" style="display: none;">
         <span>No hay respuestas correctas o incorrectas. Solo quiero saber cómo te sientes.</span>
         <img src="{{ asset('images/assets/flor.png')}}" alt="" width="280" height="280">
     </div>
@@ -233,7 +263,40 @@
                 preguntas.classList.add("hidden");
             }
         }
+
+        document.getElementById('paso').addEventListener('change', mostrarPreguntasAdicionales);
+
+        document.getElementById('enviar').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita la recarga de la página
+
+            let form = document.querySelector('form');
+            let formData = new FormData(form);
+
+            fetch("{{ route('registrarEmocion') }}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Ocultar botón de enviar
+                    document.getElementById('enviar').style.display = 'none';
+
+                    // Mostrar mensaje con imagen de la niña
+                    let mensajeContainer = document.getElementById('mensaje-container');
+                    mensajeContainer.style.display = 'flex';
+
+                    // Deshabilitar todos los campos del formulario para evitar cambios
+                    document.querySelectorAll('select, button').forEach(input => input.disabled = true);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
     </script>
+
     @include('components.pagefoot')
 </body>
 

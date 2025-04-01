@@ -10,6 +10,10 @@ class viewController extends Controller
     public function loginView(){
         return view('login');
     }
+    // Registrar un cliente
+    public function singninUpView(){
+        return view('registro');
+    }
 
     // Vistas principales
     public function homepageView(){
@@ -18,6 +22,8 @@ class viewController extends Controller
     public function calendarView(){
         return view('subviews.calendar');
     }
+   
+
     public function calmaEstresView(){
         return view('calmaestres');
     }

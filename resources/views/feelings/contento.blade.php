@@ -6,20 +6,23 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
 <style>
-    body{
+    body {
         font-family: 'lato';
     }
+
     .content-box h2 {
         float: right;
         color: #014235;
         font-family: 'Fraunces';
         font-size: 2.4rem;
     }
-    .content-box h3{
+
+    .content-box h3 {
         padding-top: 1rem;
         font-family: 'Fraunces';
         color: #014235;
     }
+
     .container-custom {
         flex: 1;
         display: flex;
@@ -51,12 +54,12 @@
 
 <div class="container-custom">
     <div class="content-box">
-    <div class="back-button-container2">
+        <div class="back-button-container2">
             <a href="{{ route('selecEmociones') }}" class="back-button">
                 <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
             </a>
         </div>
-        
+
         <div class="text-with-image-left">
             <img src="{{ asset('images/assets/niña-feliz.png') }}" alt="Niña feliz" width="250">
             <h2>"¡Qué bien que te sientas contento!<br>Es un gran día para disfrutar."</h2>
@@ -68,10 +71,10 @@
             <div class="text-with-image">
                 <p>1. Haz algo positivo por los demás:<br> Sorprende a alguien con una sonrisa, un mensaje o un pequeño gesto amable.</p>
                 <img src="{{ asset('images/assets/gato-perro.png') }}" alt="Gato y perro felices">
-                
+
                 <p>2. Escribe o comparte lo que te hace feliz:<br> Escribe tres cosas que te hacen sonreír o cuenta algo divertido que te haya pasado hoy.</p>
                 <img src="{{ asset('images/assets/escribir-feliz.png') }}" alt="Escribir felicidad">
-                
+
                 <p>3. Disfruta del momento:<br> Tómate un momento para respirar profundamente y sentir gratitud por lo que te hace feliz.</p>
                 <img src="{{ asset('images/assets/musica-feliz.png') }}" alt="Escuchar música feliz">
             </div>

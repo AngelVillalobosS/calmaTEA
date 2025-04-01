@@ -146,9 +146,9 @@
                 <small id="passwordNumber" class="error-message">Debe incluir al menos un número.</small>
                 <small id="passwordSpecial" class="error-message">Debe incluir al menos un carácter especial (@$!%*?&).</small>
             </div>
-            <a href="{{route('hpView')}}" class="lginbttn"><button type="submit">Iniciar sesión</button></a>
+            <button type="button" class="lginbttn" onclick="redirigirPagina()">Iniciar Sesion</button>
         </form>
-        <p>¿No tienes una cuenta? <a href="{{route('formularioregistro')}}" class="register-link">Ingresa aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="{{route('formularioregistro')}}" class="register-link">Registrate Aquí</a></p>
     </div>
     <div class="illustration">
         <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
@@ -162,7 +162,7 @@
         var upperCheck = /[A-Z]/.test(password);
         var lowerCheck = /[a-z]/.test(password);
         var numberCheck = /\d/.test(password);
-        var specialCheck = /[@$!%*?&]/.test(password);
+        var specialCheck = /[@$!%*?&_]/.test(password);
         
         document.getElementById("passwordLength").style.display = lengthCheck ? "none" : "block";
         document.getElementById("passwordUpper").style.display = upperCheck ? "none" : "block";
@@ -172,6 +172,11 @@
         
         return lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck;
     }
+    function redirigirPagina() {
+    // Aquí agregas la redirección a la página que quieres
+    window.location.href = "{{ route('hpView') }}"; // Redirige a la ruta hpView
+}
+
 </script>
 
 @include('components.pagefoot')

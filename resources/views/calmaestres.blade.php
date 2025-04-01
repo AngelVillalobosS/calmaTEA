@@ -132,15 +132,42 @@
             width: 100%;
             margin-top: 40px;
         }
+        .video-options .breathing-button {
+    color: black !important;
+    background-color: white !important;
+    border: 2px solid black !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.video-options .breathing-button:hover {
+    background-color: black !important;
+    color: white !important;
+}
+.back-btn-container {
+    position: absolute;  /* Hace que la flecha esté fuera del flujo normal */
+    top: 250px;  /* Ajusta la distancia desde la parte superior de la página */
+    left: 250px;  /* Ajusta la distancia desde el borde izquierdo */
+    z-index: 10;  /* Asegura que la flecha esté por encima de otros elementos si es necesario */
+}
+
+
+
+.back-arrow {
+    width: 120px; /* Ajusta el tamaño de la flecha */
+    height: auto; /* Mantén la proporción de la imagen */
+}
+
+
     </style>
 </head>
 <body>
     
-    <div class="back-btn-container">
-        <a href="{{ route('selecEmociones') }}" class="back-button">
-            <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" width="70">
-        </a>
-    </div> 
+<div class="back-btn-container">
+    <a href="{{ route('selecEmociones') }}" class="back-button">
+        <img src="{{ asset('images/assets/flecha.png')}}" alt="Regresar" class="back-arrow">
+    </a>
+</div>
+
 
     <h2>Estrategias para calmarte cuando estés nervioso o ansioso</h2>
     <div class="strategy">
@@ -156,12 +183,28 @@
         </button>
     </div>
     <div id="breathingModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <video id="breathingVideo" controls>
-                <source src="{{ asset('files/ejerciciorespiracion.mp4')}}    " type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 style="color: white;">Elige un método de respiración</h3>
+
+        <!-- Lista de opciones de videos -->
+        <div class="video-options">
+            <button class="breathing-button" onclick="changeVideo('{{ asset('files/ejerciciorespiracion.mp4') }}')">
+                Respiración profunda
+            </button>
+            <button class="breathing-button" onclick="changeVideo('{{ asset('files/ejerciciosrespiracion1.mp4') }}')">
+                Técnica 4-7-8
+            </button>
+            <button class="breathing-button" onclick="changeVideo('{{ asset('files/ejerciciosrespiracion2.mp4') }}')">
+                Respiración diafragmática
+            </button>
+        </div>
+
+        <!-- Reproductor de video -->
+        <video id="breathingVideo" controls>
+            <source id="videoSource" src="{{ asset('files/ejerciciorespiracion1.mp4') }}" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
         </div>
     </div>
     <div class="strategy">
@@ -187,10 +230,25 @@
     <div id="musicModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeMusicModal()">&times;</span>
-            <video id="musicVideo" controls>
-                <source src="{{ asset('files/relaxvideo.mp4')}}" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
+            <h3 style="color: white;">Elige un la musica que mas te guste</h3>
+
+            <!-- Lista de opciones de videos -->
+            <div class="video-options">
+                <button class="breathing-button" onclick="changeMusic('{{ asset('files/relaxvideo.mp4') }}')">
+                    Musica relajante 1
+                </button>
+                <button class="breathing-button" onclick="changeMusic('{{ asset('files/relaxvideo2.mp4') }}')">
+                    Musica relajante 2
+                </button>
+                <button class="breathing-button" onclick="changeMusic('{{ asset('files/relaxvideo3.mp4') }}')">
+                    Musica relajante 1
+                </button>
+            </div>
+            <!-- Reproductor de video -->
+        <video id="musicVideo" controls>
+            <source id="videoSource" src="{{ asset('files/ejerciciorespiracion1.mp4') }}" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
         </div>
     </div>
     <div class="strategy">
@@ -240,6 +298,23 @@
             document.getElementById("musicModal").style.display = "none";
             document.getElementById("musicVideo").pause();
         }
+        function changeVideo(videoSrc) {
+        let videoElement = document.getElementById("breathingVideo");
+        let sourceElement = document.getElementById("videoSource");
+        sourceElement.src = videoSrc;
+        videoElement.load();  // Recargar el video con la nueva fuente
+        videoElement.play();  // Reproducir automáticamente el nuevo video
+        }
+
+        function changeMusic(videoSrc) {
+            let videoElement = document.getElementById("musicVideo");
+            let sourceElement = videoElement.getElementsByTagName("source")[0];
+            sourceElement.src = videoSrc;
+            videoElement.load();  // Recargar el video con la nueva fuente
+            videoElement.play();  // Reproducir automáticamente el nuevo video
+        }
+
+
     </script>
     @include('components.pagefoot')
 </body>

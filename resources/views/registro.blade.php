@@ -3,6 +3,129 @@
 
 <title>CalmaTea - Iniciar Sesión</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Lato:wght@300&display=swap" rel="stylesheet">
+
+<div class="container">
+    <div class="login-box">
+        <h2>Ábrete a<br>la atención plena</h2>
+        <p>Registrate para continuar con tu salud emocional</p>
+        <form method="POST" action="{{ route('guardaregistro') }}" onsubmit="return validarPassword()">
+            @csrf
+            <div class="form-group">
+                <label for="nombre">Nombre *</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellidos *</label>
+                <input type="text" name="apellidos" id="apellidos" placeholder="Ingrese sus apellidos" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" name="email" id="email" placeholder="Ingrese su email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña *</label>
+
+                <input type="password" name="password" id="password" placeholder="Ingrese una contraseña" required>
+
+                <!--<input type="checkbox" id="showPassword"> <label for="showPassword">Mostrar contraseña</label>--> <!-- Checkbox para mostrar la contraseña -->
+                <small id="passwordHelp" class="error-message">La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula, un número y un carácter especial.</small>
+                <small id="passwordLength" class="error-message">Debe tener al menos 8 caracteres.</small>
+                <small id="passwordUpper" class="error-message">Debe incluir al menos una letra mayúscula.</small>
+                <small id="passwordLower" class="error-message">Debe incluir al menos una letra minúscula.</small>
+                <small id="passwordNumber" class="error-message">Debe incluir al menos un número.</small>
+                <small id="passwordSpecial" class="error-message">Debe incluir al menos un carácter especial (@$!%*?&_).</small>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirmar Contraseña *</label>
+                <input type="password" id="confirm_password" placeholder="Confirme su contraseña" required>
+            </div>
+            <input type="checkbox" id="showPassword"> <label for="showPassword">Mostrar contraseñas</label>
+            <input type="submit" class="lginbttn" value="Registrate">
+            
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="{{route('formulariologin')}}" class="register-link">Inicia sesion</a></p>
+    </div>
+    <div class="illustration">
+        <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
+    </div>
+</div>
+<!-- Codigo para la validacion de la contrasenia -->
+<script>
+    function validarPassword() {
+        event.preventDefault();
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        var lengthCheck = password.length >= 8;
+        var upperCheck = /[A-Z]/.test(password);
+        var lowerCheck = /[a-z]/.test(password);
+        var numberCheck = /\d/.test(password);
+        var specialCheck = /[@$!%*?&_]/.test(password); // Validacion de char especiales
+        var matchCheck = password === confirmPassword; // Validacion de que ambas contraseñas sean iguales
+
+        // Validacion de los datos y tiempo de espera de los mensajes
+        if (!lengthCheck) showError(document.getElementById("passwordLength"));
+        if (!upperCheck) showError(document.getElementById("passwordUpper"));
+        if (!lowerCheck) showError(document.getElementById("passwordLower"));
+        if (!numberCheck) showError(document.getElementById("passwordNumber"));
+        if (!specialCheck) showError(document.getElementById("passwordSpecial"));
+        
+
+        if (!matchCheck) {
+            alert("Las contraseñas no coinciden.");
+            return false;
+        }
+
+        return lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck && matchCheck;
+        if (!valid) {
+            return false;
+        }
+        event.currentTarget.submit();
+    }
+
+    // Mostrar y ocultar la contraseña al marcar o desmarcar el checkbox
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordField = document.getElementById('password');
+        var confirmPasswordField = document.getElementById('confirm_password');
+        var type = this.checked ? 'text' : 'password';
+        passwordField.type = type;
+        confirmPasswordField.type = type;
+    });
+
+    function redirigirPagina() {
+        // Aquí agregas la redirección a la página que quieres
+        window.location.href = "{{ route('hpView') }}"; // Redirige a la ruta hpView
+    }
+</script>
+
+<!-- Codigo para el temporizador de los mensajes de error -->
+<script>
+    function showError(messageElement) {
+        messageElement.style.display = 'block';
+
+        // Eliminar temporizadores anteriores si existen
+        if (messageElement.timeoutId) {
+            clearTimeout(messageElement.timeoutId);
+        }
+
+        // Configurar desvanecimiento después de 5 segundos
+        messageElement.timeoutId = setTimeout(() => {
+            messageElement.classList.add('fade-out');
+
+            // Ocultar completamente después de la transición
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+                messageElement.classList.remove('fade-out');
+            }, 750);
+
+        }, 5000);
+    }
+
+    // Modificar las líneas donde se muestran los errores (ejemplo):
+    document.getElementById("passwordLength").style.display = lengthCheck ? "none" : showError(document.getElementById("passwordLength"));
+</script>
+
+<!-- Estilos de la pagina -->
 <style>
     body {
         font-family: 'Lato', sans-serif;
@@ -36,7 +159,6 @@
         padding: 20px;
         gap: 20px;
     }
-
 
     .login-box {
         max-width: 400px;
@@ -105,33 +227,60 @@
     }
 
     .illustration img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
 
+    .register-link {
+        font-size: 16px;
+        color: #2a7f62;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+
+    .error-message {
+        display: none;
+        font-size: 14px;
+        padding: 10px 15px;
+        margin-top: 5px;
+        border-radius: 4px;
+        background: #fee;
+        border: 1px solid #ff3860;
+        color: #ff3860;
+        position: relative;
+        animation: slideIn 0.3s ease-out;
+        width: 100%;
+        box-sizing: border-box;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    .error-message::before {
+        content: "⚠️";
+        margin-right: 8px;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .error-message.fade-out {
+        opacity: 0;
+    }
 </style>
 
-<div class="container">
-    <div class="login-box">
-        <h2>Ábrete a<br>la atención plena</h2>
-        <p>Registrate para continuar con tu salud emocional</p>
-        <form>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" placeholder="Ingrese su email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña *</label>
-                <input type="password" id="password" placeholder="Ingrese una contraseña" required>
-            </div>
-            <a href="{{route('hpView')}}" class="lginbttn"><button type="submit"> Registrate</button></a>
-        </form>
-        <p>¿Ya tienes una cuenta? <a href="{{route('formulariologin')}}" class="register-link">Inicia aquí</a></p>
-    </div>
-    <div class="illustration">
-        <img src="{{asset('images/assets/girl_frog.png')}}" alt="Ilustración de niña con gorro de rana">
-    </div>
-</div>
 @include('components.pagefoot')
 @stop
