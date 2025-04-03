@@ -8,6 +8,12 @@ use App\Models\Emociones;
 
 class RegistroEmocionController extends Controller
 {
+    public function mostrarCalendario()
+    {
+        $emociones = emociones::all(); // Obtener todas las emociones de la base de datos
+        return view('calendario', compact('emociones'));
+    }
+
     public function registrarEmocion(Request $request)
     {
         \Log::info($request->all());
@@ -24,6 +30,16 @@ class RegistroEmocionController extends Controller
             'ayuda' => 'required',
             'animal' => 'required',
         ]);
+
+        $fechaHoy = Carbon::now()->timezone('America/Mexico_City')->toDateString();
+
+        // Verificar si ya existe un registro en la misma fecha
+        if (Emociones::whereDate('fecha', $fechaHoy)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ya has registrado una emoción hoy. Inténtalo mañana.',
+            ], 400);
+        }
 
         $emojiMap = [
             'Nervioso' => '😬',
@@ -49,7 +65,7 @@ class RegistroEmocionController extends Controller
         $emocion->cambiar = $request->cambiar;
         $emocion->ayuda = $request->ayuda;
         $emocion->animal = $request->animal;
-        $emocion->fecha = Carbon::now()->timezone('America/Mexico_City')->toDateString();
+        $emocion->fecha = $fechaHoy;
         $emocion->save();
 
         return response()->json([

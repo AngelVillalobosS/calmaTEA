@@ -15,7 +15,7 @@ class registroController extends Controller
 
     public function showLoginForm()
     {
-        return view('login'); // Asegúrate que esta vista existe
+        return view('login'); 
     }
 
     public function guardaregistro(Request $request)

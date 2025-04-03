@@ -21,7 +21,6 @@ Route::get('/formulariologin', [registroController::class, 'formulariologin'])->
 
 // Principales
 
-
 Route::get('homepage', [viewController::class, 'homepageView'])->name('hpView');
 
 Route::get('mostrarCalendario', [registroEmocionController::class, 'mostrarCalendario'])->name('mostrarCalendario');

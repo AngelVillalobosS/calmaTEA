@@ -151,7 +151,7 @@ body {
             /* Hace que la flecha esté fuera del flujo normal */
             top: 250px;
             /* Ajusta la distancia desde la parte superior de la página */
-            left: 250px;
+            left: 200px;
             /* Ajusta la distancia desde el borde izquierdo */
             z-index: 10;
             /* Asegura que la flecha esté por encima de otros elementos si es necesario */

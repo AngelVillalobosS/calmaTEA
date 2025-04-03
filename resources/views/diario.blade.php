@@ -114,9 +114,9 @@
         .back-btn-container {
             position: absolute;
             /* Hace que la flecha esté fuera del flujo normal */
-            top: 250px;
+            top: 200px;
             /* Ajusta la distancia desde la parte superior de la página */
-            left: 0px;
+            left: -3em;
             /* Ajusta la distancia desde el borde izquierdo */
             z-index: 10;
             /* Asegura que la flecha esté por encima de otros elementos si es necesario */
@@ -267,34 +267,38 @@
         document.getElementById('paso').addEventListener('change', mostrarPreguntasAdicionales);
 
         document.getElementById('enviar').addEventListener('click', function(event) {
-            event.preventDefault(); // Evita la recarga de la página
+    event.preventDefault(); // Evita la recarga de la página
 
-            let form = document.querySelector('form');
-            let formData = new FormData(form);
+    let form = document.querySelector('form');
+    let formData = new FormData(form);
 
-            fetch("{{ route('registrarEmocion') }}", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Ocultar botón de enviar
-                    document.getElementById('enviar').style.display = 'none';
+    fetch("{{ route('registrarEmocion') }}", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Ocultar botón de enviar
+            document.getElementById('enviar').style.display = 'none';
 
-                    // Mostrar mensaje con imagen de la niña
-                    let mensajeContainer = document.getElementById('mensaje-container');
-                    mensajeContainer.style.display = 'flex';
+            // Mostrar mensaje con imagen de la niña
+            let mensajeContainer = document.getElementById('mensaje-container');
+            mensajeContainer.style.display = 'flex';
 
-                    // Deshabilitar todos los campos del formulario para evitar cambios
-                    document.querySelectorAll('select, button').forEach(input => input.disabled = true);
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        });
+            // Deshabilitar todos los campos del formulario para evitar cambios
+            document.querySelectorAll('form select, form button').forEach(input => input.disabled = true);
+        } else {
+            // Mostrar alerta si ya se registró la emoción en el día
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
     </script>
 
     @include('components.pagefoot')

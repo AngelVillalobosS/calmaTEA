@@ -191,6 +191,9 @@
 <body>
     <div class="container">
         <h2>¡Bienvenido a CalmaTea!</h2>
+        @if(session('error'))
+    <div class="alert alert-danger text-center">{{ session('error') }}</div>
+@endif
         <p>
             CalmaTea es un espacio seguro para entender y manejar tus emociones de forma sencilla.
             Aquí encontrarás herramientas, consejos y actividades para expresarte, relajarte y sentirte mejor.

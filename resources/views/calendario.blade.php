@@ -76,8 +76,8 @@
 
         function updateCalendar() {
             const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Total de días en el mes
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // Día de la semana del 1er día del mes
 
             // Actualiza el encabezado del mes y año
             document.getElementById("month-year").textContent = `${months[currentMonth]} - ${currentYear}`;
@@ -86,31 +86,30 @@
             const calendarBody = document.getElementById("calendar-body");
             calendarBody.innerHTML = "";
 
-            // Llenar la tabla con los días del mes
             let day = 1;
-            for (let i = 0; i < 5; i++) {
+            let totalCells = firstDay + daysInMonth; // Celdas totales (espacios vacíos + días del mes)
+            let rows = Math.ceil(totalCells / 7); // Determinar el número correcto de filas
+
+            for (let i = 0; i < rows; i++) {
                 let row = "<tr>";
                 for (let j = 0; j < 7; j++) {
                     if (i === 0 && j < firstDay) {
-                        row += "<td></td>"; // Espacios vacíos antes del primer día
+                        row += "<td></td>"; // Espacios vacíos antes del primer día del mes
                     } else if (day <= daysInMonth) {
-                        // Verificar si hay una emoción registrada para este día
-                        //const emotion = emociones.find(e => new Date(e.fecha).getDate() === day && new Date(e.fecha).getMonth() === currentMonth && new Date(e.fecha).getFullYear() === currentYear);
+                        // Buscar si hay una emoción en este día
                         const emotion = emociones.find(e => {
-                            let fecha = new Date(e.fecha + "T00:00:00"); // Asegurar que JavaScript no reste horas
+                            let fecha = new Date(e.fecha + "T00:00:00");
                             return fecha.getDate() === day && fecha.getMonth() === currentMonth && fecha.getFullYear() === currentYear;
                         });
 
                         row += `<td>${day}${emotion ? `<div class="emotion">${emotion.emoji}</div><div class="emotion">${emotion.emocion}</div>` : ''}</td>`;
                         day++;
                     } else {
-                        row += "<td></td>"; // Rellenar el resto del mes
+                        row += "<td></td>"; // Espacios vacíos al final del mes
                     }
                 }
                 row += "</tr>";
                 calendarBody.innerHTML += row;
-
-                if (day > daysInMonth) break;
             }
         }
 
